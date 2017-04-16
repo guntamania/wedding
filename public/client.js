@@ -8,7 +8,7 @@ var reset_flag = 0;
 var counterElement = document.getElementById("counter");
 
 // Get a reference to the database service
-var database = firebase.database();
+var database = firebase? firebase.database():null;
 
 database.ref('/hee/count').once('value').then(function(snapshot) {
     var val = snapshot.val() == null ? 0 : snapshot.val();
@@ -21,21 +21,25 @@ function resetCount() {
 }
 
 // for Debug
-var globalCount = firebase.database().ref('/hee/count');
-globalCount.on('value', function(snapshot) {
-    var val = snapshot.val() == null ? 0 : snapshot.val();
-    counterElement.innerHTML = "合計:" + val + "へぇ";
-});
+if (database) {
+    var globalCount = database.ref('/hee/count');
+    globalCount.on('value', function(snapshot) {
+	var val = snapshot.val() == null ? 0 : snapshot.val();
+	counterElement.innerHTML = "合計:" + val + "へぇ";
+    });
+}
 
 // callbacks to receive from MC
-var resetFlag = firebase.database().ref('/hee/reset');
-resetFlag.on('value', function(snapshot) {
-    if(snapshot.val() != null && reset_flag != snapshot.val()) {
-	console.log("snap"+snapshot.val() + "reset_flag" + reset_flag );
-	reset_flag = snapshot.val();
-	resetCount();
-    }
-});
+if (database) {
+    var resetFlag = database.ref('/hee/reset');
+    resetFlag.on('value', function(snapshot) {
+	if(snapshot.val() != null && reset_flag != snapshot.val()) {
+	    console.log("snap"+snapshot.val() + "reset_flag" + reset_flag );
+	    reset_flag = snapshot.val();
+	    resetCount();
+	}
+    });
+}
 
 function updateView() {
     if(myHeeElement) {
@@ -52,13 +56,15 @@ function addHee() {
     hees++;
     updateView();
     // increase remote value
-    database.ref('hee/count').once('value').then(
-	function(snapshot) {
-	    firebase.database().ref('/hee').set({
-		count: (snapshot.val() + 1)
-	    });
-	}
-    );
+    if(database) {
+	database.ref('hee/count').once('value').then(
+	    function(snapshot) {
+		firebase.database().ref('/hee').set({
+		    count: (snapshot.val() + 1)
+		});
+	    }
+	);
+    }
 }
 
 heeElement.addEventListener('touchstart', function(event) {
