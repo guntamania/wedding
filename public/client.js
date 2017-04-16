@@ -63,6 +63,6 @@ function addHee() {
 
 heeElement.addEventListener('touchstart', function(event) {
     console.log("touch_start");
-    sound();
-    addHee();
+//    sound();
+//    addHee();
 }, false);
