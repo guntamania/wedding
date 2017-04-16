@@ -11,16 +11,16 @@
       var audio;
       window.onload = function()
       {
-      audio = new Audio('nc69286.mp3');
+      
+
       };
       function sound()
       {
-
+      var audio = document.getElementById("hee_sound");
+      audio.load();
       audio.pause();
       audio.currentTime = 0;
       audio.play();
-
-      addHee();
       }
     </script>
     
@@ -28,14 +28,24 @@
       button {
         font-size: 50pt;
       }
+      audio { 
+   display:none;
+}
     </style>
   </head>
   <body>
+    <audio id="hee_sound">
+       <!-- <source src="nc69286.ogg" type="audio/ogg"> -->
+       <source src="sound.mp3" type="audio/mpeg">
+       Your browser does not support the audio element.
+    </audio>
     <button id="hee_button">
       へえ
     </button>
+    <div id="my_hee">
+    </div>
     <div id="counter">
     </div>
   </body>
-  <script type="text/javascript" src="scr.js"></script>
+  <script type="text/javascript" src="client.js"></script>
 </html>

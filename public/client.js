@@ -1,13 +1,16 @@
-var counterElement = document.getElementById("counter");
+
 var heeElement = document.getElementById("hee_button");
 var myHeeElement = document.getElementById("my_hee");
-var hees;
+var hees = 0;
 var reset_flag = 0;
+
+// for debug
+var counterElement = document.getElementById("counter");
 
 // Get a reference to the database service
 var database = firebase.database();
 
-firebase.database().ref('/hee/count').once('value').then(function(snapshot) {
+database.ref('/hee/count').once('value').then(function(snapshot) {
     var val = snapshot.val() == null ? 0 : snapshot.val();
     counterElement.innerHTML = "合計: "+val + "へぇ";
 });
@@ -17,8 +20,9 @@ function resetCount() {
     updateView();
 }
 
-var starCountRef = firebase.database().ref('/hee/count');
-starCountRef.on('value', function(snapshot) {
+// for Debug
+var globalCount = firebase.database().ref('/hee/count');
+globalCount.on('value', function(snapshot) {
     var val = snapshot.val() == null ? 0 : snapshot.val();
     counterElement.innerHTML = "合計:" + val + "へぇ";
 });
@@ -26,27 +30,12 @@ starCountRef.on('value', function(snapshot) {
 // callbacks to receive from MC
 var resetFlag = firebase.database().ref('/hee/reset');
 resetFlag.on('value', function(snapshot) {
-    if(reset_flag != snapshot.val()) {
+    if(snapshot.val() != null && reset_flag != snapshot.val()) {
 	console.log("snap"+snapshot.val() + "reset_flag" + reset_flag );
 	reset_flag = snapshot.val();
 	resetCount();
     }
 });
-
-function resetAllHees() {
-    // increase remote value
-    database.ref('hee/reset').once('value').then(
-	function(snapshot) {
-	    firebase.database().ref('/hee').set({
-		reset: (snapshot.val() + 1)
-	    });
-	}
-    );
-
-    firebase.database().ref('/hee').set({
-	count: 0
-    });
-}
 
 function updateView() {
     if(myHeeElement) {
