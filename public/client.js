@@ -48,7 +48,7 @@ function updateView() {
 }
 
 function addHee() {
-    if (hees > 20) {
+    if (hees >= 20) {
 	console.log("return");
 	return;
     }
