@@ -3,6 +3,7 @@ var heeElement = document.getElementById("hee_button");
 var myHeeElement = document.getElementById("my_hee");
 var hees = 0;
 var reset_flag = 0;
+var refToCount = null;
 
 // for debug
 var counterElement = document.getElementById("counter");
@@ -10,22 +11,36 @@ var counterElement = document.getElementById("counter");
 // Get a reference to the database service
 var database = firebase? firebase.database():null;
 
-database.ref('/hee/count').once('value').then(function(snapshot) {
-    var val = snapshot.val() == null ? 0 : snapshot.val();
-    counterElement.innerHTML = "合計: "+val + "へぇ";
-});
+if(database) {
+    database.ref('/hee/counts').once('value').then(function(snapshot) {
+	console.log('snapshot'+snapshot.val());
+	var total = sum(snapshot.val());
+	counterElement.innerHTML = "合計:" + total + "へぇ";
+    });
+}
 
 function resetCount() {
+    refToCount = null;
     hees = 0;
     updateView();
 }
 
+function sum(arr) {
+    var sum = 0;
+    console.log('in log' + JSON.stringify(arr));
+    for(var key in arr) {
+	sum += arr[key]['count_for_user'];
+    }
+    return sum;
+}
+
 // for Debug
 if (database) {
-    var globalCount = database.ref('/hee/count');
+    var globalCount = database.ref('/hee/counts');
     globalCount.on('value', function(snapshot) {
-	var val = snapshot.val() == null ? 0 : snapshot.val();
-	counterElement.innerHTML = "合計:" + val + "へぇ";
+	console.log('snapshot'+snapshot.val());
+	var total = sum(snapshot.val());
+	counterElement.innerHTML = "合計:" + total + "へぇ";
     });
 }
 
@@ -52,18 +67,17 @@ function addHee() {
 	console.log("return");
 	return;
     }
+    if (!refToCount) {
+	refToCount = database.ref('hee/counts').push();
+    }
     // increase local value
     hees++;
     updateView();
     // increase remote value
     if(database) {
-	database.ref('hee/count').once('value').then(
-	    function(snapshot) {
-		firebase.database().ref('/hee').set({
-		    count: (snapshot.val() + 1)
-		});
-	    }
-	);
+	refToCount.set({
+	    "count_for_user": hees
+	});
     }
 }
 

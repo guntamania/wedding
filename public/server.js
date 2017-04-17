@@ -3,48 +3,45 @@ var counterElement = document.getElementById("counter");
 // Get a reference to the database service
 var database = firebase.database();
 
-database.ref('/hee/count').once('value').then(function(snapshot) {
-    var val = snapshot.val() == null ? 0 : snapshot.val();
-    counterElement.innerHTML = "合計: "+val + "へぇ";
-});
+if (database) {
+    database.ref('/hee/counts').once('value').then(function(snapshot) {
+	array_num = (snapshot.val().length > 0) ? snapshot.val().length : 0;
+	console.log('snapshot'+snapshot.val());
+	var total = sum(snapshot.val());
+	counterElement.innerHTML = "合計:" + total + "へぇ";
+    });
+}
 
-var sumOfHee = firebase.database().ref('/hee/count');
-sumOfHee.on('value', function(snapshot) {
-    var val = snapshot.val() == null ? 0 : snapshot.val();
-    counterElement.innerHTML = "合計:" + val + "へぇ";
-});
+if (database) {
+    var globalCount = database.ref('/hee/counts');
+    globalCount.on('value', function(snapshot) {
+	console.log('snapshot'+snapshot.val());
+	var total = sum(snapshot.val());
+	counterElement.innerHTML = "合計:" + total + "へぇ";
+    });
+}
 
 // sends reset
 function resetAllHees() {
     // increase remote value
     database.ref('hee/reset').once('value').then(
 	function(snapshot) {
-	    firebase.database().ref('/hee').set({
+	    database.ref('/hee').set({
 		reset: (snapshot.val() + 1)
 	    });
 	}
     );
 
-    firebase.database().ref('/hee').set({
-	count: 0
-    });
+    database.ref('/hee/counts').removed();
 }
 
-function addHee() {
-    if (hees > 20) {
-	console.log("return");
-	return;
+function sum(arr) {
+    var sum = 0;
+    console.log('in log' + JSON.stringify(arr));
+    for(var key in arr) {
+	sum += arr[key]['count_for_user'];
     }
-    // increase local value
-    hees++;
-    updateView();
-    // increase remote value
-    database.ref('hee/count').once('value').then(
-	function(snapshot) {
-	    firebase.database().ref('/hee').set({
-		count: (snapshot.val() + 1)
-	    });
-	}
-    );
+    return sum;
 }
+
 
