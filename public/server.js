@@ -5,7 +5,6 @@ var database = firebase.database();
 
 if (database) {
     database.ref('/hee/counts').once('value').then(function(snapshot) {
-	array_num = (snapshot.val().length > 0) ? snapshot.val().length : 0;
 	console.log('snapshot'+snapshot.val());
 	var total = sum(snapshot.val());
 	counterElement.innerHTML = "合計:" + total + "へぇ";
@@ -36,6 +35,7 @@ function resetAllHees() {
 }
 
 function sum(arr) {
+    if(!arr) return 0;
     var sum = 0;
     console.log('in log' + JSON.stringify(arr));
     for(var key in arr) {
