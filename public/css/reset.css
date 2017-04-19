@@ -39,9 +39,11 @@ a {
   background: transparent;
   text-decoration: none;
 
-  &:focus {
-    outline: none;
-  }
+&
+:focus {
+  outline: none;
+}
+
 }
 
 ins {
