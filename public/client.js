@@ -1,6 +1,3 @@
-
-var heeElement = document.getElementById("hee_button");
-var myHeeElement = document.getElementById("my_hee");
 var hees = 0;
 var reset_flag = 0;
 var refToCount = null;
@@ -19,12 +16,16 @@ if(database) {
     });
 }
 
+/**
+ * Resets local value because of receiving reseting signal from server.
+ */
 function resetCount() {
     refToCount = null;
     hees = 0;
     updateView();
 }
 
+// for debug
 function sum(arr) {
     var sum = 0;
     console.log('in log' + JSON.stringify(arr));
@@ -56,12 +57,18 @@ if (database) {
     });
 }
 
+/**
+ * Update counter of html. 
+ *
+ * This shows only local value.
+ */
 function updateView() {
-    if(myHeeElement) {
-	myHeeElement.innerHTML = hees + "へぇ";
-    }
+    $('#my_hee').html(hees + "へぇ"); 
 }
 
+/**
+ * Sends a hee to firebase and increase local value and display it.
+ */
 function addHee() {
     if (hees >= 20) {
 	console.log("return");
@@ -80,9 +87,3 @@ function addHee() {
 	});
     }
 }
-
-heeElement.addEventListener('touchstart', function(event) {
-    console.log("touch_start");
-//    sound();
-//    addHee();
-}, false);

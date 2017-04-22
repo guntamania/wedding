@@ -1,13 +1,15 @@
-var counterElement = document.getElementById("counter");
-
 // Get a reference to the database service
 var database = firebase.database();
+
+//
+// Callbacks from firebase
+//
 
 if (database) {
     database.ref('/hee/counts').once('value').then(function(snapshot) {
 	console.log('snapshot'+snapshot.val());
 	var total = sum(snapshot.val());
-	counterElement.innerHTML = "合計:" + total + "へぇ";
+	$('#counter').html("合計:" + total + "へぇ");
     });
 }
 
@@ -16,11 +18,14 @@ if (database) {
     globalCount.on('value', function(snapshot) {
 	console.log('snapshot'+snapshot.val());
 	var total = sum(snapshot.val());
-	counterElement.innerHTML = "合計:" + total + "へぇ";
+	$('#counter').html("合計:" + total + "へぇ");
     });
 }
 
+//
 // sends reset
+//
+
 function resetAllHees() {
     // increase remote value
     database.ref('hee/reset').once('value').then(
@@ -33,6 +38,10 @@ function resetAllHees() {
 
     database.ref('/hee/counts').removed();
 }
+
+//
+// Utilities
+//
 
 function sum(arr) {
     if(!arr) return 0;
