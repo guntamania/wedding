@@ -11,5 +11,22 @@
 }
 
 #counter {
-  font-size: 300px;
+    position: absolute;
+    font-size: 30vh;
+    top: 35vh;        
+    left: 0;           
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+}
+
+html {
+    height: 100%;
+    width: 100%;   
+}
+
+main {
+    position: relative; /* 2 */
+    height: 100%;
+    width: 100%;   
 }
