@@ -12,11 +12,10 @@
 
 #counter {
     position: absolute;
-    font-size: 30vh;
+    font-size: 10vh;
     top: 35vh;        
-    left: 0;           
-    margin: auto;
-    vertical-align: middle;
+    /* margin: auto; */
+    /* vertical-align: middle; */
     text-align: center;
 }
 
@@ -25,8 +24,6 @@ html {
     width: 100%;   
 }
 
-main {
-    position: relative; /* 2 */
-    height: 100%;
-    width: 100%;   
+#main {
+ 
 }
