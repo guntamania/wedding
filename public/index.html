@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>へえぼたん</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>へえぼたん</title>
 
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/font.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
+  <link rel="stylesheet" type="text/css" href="css/font.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
 
-    <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
-<!--    <script src="https://apis.googljs/platform.js" async defer></script> -->
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/config.js"></script>
-    <script type="text/javascript" src="./js/index.js"></script>
-  </head>
-  <body>
-    <audio id="hee_sound">
-       <!-- <source src="nc69286.ogg" type="audio/ogg"> -->
-       <source src="sound.mp3" type="audio/mpeg"/>
-       Your browser does not support the audio element.
-    </audio>
-    <button id="hee_button" onClick="sound()">
-      へえ
-    </button>
-    <div id="my_hee">
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+  <!--    <script src="https://apis.googljs/platform.js" async defer></script> -->
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/config.js"></script>
+  <script type="text/javascript" src="./js/index.js"></script>
+</head>
+<body>
+<audio id="hee_sound">
+  <!-- <source src="nc69286.ogg" type="audio/ogg"> -->
+  <source src="sound.mp3" type="audio/mpeg"/>
+  Your browser does not support the audio element.
+</audio>
+<div class="wrapper">
+  <div class="content">
+    <div class="button_wrapper">
+      <button class="button" id="hee_button" onClick="sound();buttonPush();">へぇ</button>
+      <div class="button_base">
+        <p class="button_base_description">
+          <span id="my_hee"></span>
+          <span id="counter"></span>
+        </p>
+      </div>
     </div>
-    <div id="counter">
-    </div>
-  </body>
-  <script type="text/javascript" src="./js/client.js"></script>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="./js/client.js"></script>
 </html>
