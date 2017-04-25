@@ -11,3 +11,11 @@ function sound() {
     audio[0].currentTime = 0;
     audio[0].play();
 }
+
+function buttonPush() {
+    var $thisButton = $(".button");
+    $thisButton.addClass("pushed");
+    setTimeout(function () {
+        $thisButton.removeClass("pushed");
+    }, 1200);
+}
