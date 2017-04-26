@@ -38,10 +38,14 @@ a {
   vertical-align: baseline;
   background: transparent;
   text-decoration: none;
+}
 
-  &:focus {
-    outline: none;
-  }
+a:focus {
+  outline: none;
+}
+
+a, button {
+  cursor: pointer;
 }
 
 ins {
