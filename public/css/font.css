@@ -2,3 +2,11 @@ h1, h2, h3, p, li, dt, dd, button {
   letter-spacing: 0.06em;
   font-family: Avenir, "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, "游ゴシック", "Yu Gothic", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
+
+@font-face {
+  font-family: 'DSEG7Classic-Bold';
+  src: url('../font/DSEG7Classic-Bold.woff') format('woff'),
+  url('../font/DSEG7Classic-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

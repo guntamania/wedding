@@ -63,7 +63,9 @@ if (database) {
  * This shows only local value.
  */
 function updateView() {
-    $('#my_hee').html(hees + "へぇ"); 
+    var sliceHees = ('00'+hees).slice(-2);
+    //$('#my_hee').html(hees + "へぇ");
+    $('#my_hee').html(sliceHees);
 }
 
 /**

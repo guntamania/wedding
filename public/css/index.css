@@ -21,17 +21,16 @@
     width: 200px;
     height: 100px;
     padding: 20px;
-    background-color: lightgreen;
+    background-color: #eee;
     border-radius: 20px 20px 0 0;
     border-top: 10px solid #000;
     border-right: 10px solid #000;
     border-bottom: 0;
     border-left: 10px solid #000;
-    cursor: pointer;
 
     font-size: 24px;
     font-weight: bold;
-    color: lightgreen;
+    color: #eee;
 
     -webkit-transition: height 0.4s, margin 0.4s, color 0.4s;
     transition: height 0.4s, margin 0.4s, color 0.4s;
@@ -46,7 +45,7 @@
     margin: 0 auto;
     width: 240px;
     height: 0;
-    border-bottom: 50px solid #eee;
+    border-bottom: 50px solid royalblue;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
   }
@@ -75,7 +74,15 @@
     left: -50px;
   }
   .wrapper .content .button_wrapper .button_base .button_base_description {
-    padding-top: 18px;
+    padding-top: 14px;
+    font-size: 24px;
+    color: #fff;
+    font-family: DSEG7Classic-Bold;
+  }
+  .wrapper .content .button_wrapper .button_base .button_base_description span {
+    padding: 6px 2px 6px 4px;
+    border-radius: 4px;
+    background-color: #2b2b2b;
   }
 }
 
