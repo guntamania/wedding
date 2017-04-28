@@ -9,8 +9,7 @@ if (database) {
     database.ref('/hee/counts').once('value').then(function (snapshot) {
         console.log('snapshot' + snapshot.val());
         var total = sum(snapshot.val());
-        var sliceTotal = ('000' + total).slice(-3);
-        //$('#counter').html("合計:" + total + "へぇ");
+        var sliceTotal = ('!!!!' + total).slice(-4);
         $('#counter').html(sliceTotal);
     });
 }
@@ -20,8 +19,7 @@ if (database) {
     globalCount.on('value', function (snapshot) {
         console.log('snapshot' + snapshot.val());
         var total = sum(snapshot.val());
-        var sliceTotal = ('000' + total).slice(-3);
-        //$('#counter').html("合計:" + total + "へぇ");
+        var sliceTotal = ('!!!!' + total).slice(-4);
         $('#counter').html(sliceTotal);
     });
 }
